@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simulador: Luz (intensidade) — Cinética Molecular</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Simulador Molecular — Velocidade: Luz (intensidade)</h1>
+    <p class="subtitle">Visualize como variações na intensidade da luz afetam, microscopicamente, colisões e reações e, macroscopicamente, concentrações e constantes.</p>
+  </header>
+
+  <main>
+    <section class="left">
+      <div class="panel">
+        <h2>Área molecular</h2>
+        <div class="canvas-wrap">
+          <canvas id="space" width="900" height="420"></canvas>
+          <div id="lantern" class="lantern">
+            <div class="beam"></div>
+            <div class="bulb"></div>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="startBtn">Iniciar</button>
+          <button id="pauseBtn">Pausar</button>
+          <button id="resetBtn">Reiniciar</button>
+          <label>Tempo: <span id="timeLabel">0.00 s</span></label>
+        </div>
+      </div>
+
+      <div class="panel small">
+        <h2>Parâmetros</h2>
+        <label>Luz (intensidade): <span id="lightVal">50</span>%</label>
+        <input id="light" type="range" min="0" max="100" value="50"/>
+        <div class="row">
+          <label>Velocidade (sim): <span id="speedVal">1.0</span>x</label>
+          <input id="speed" type="range" min="0.2" max="3" value="1" step="0.1"/>
+        </div>
+        <div class="row two">
+          <label>Partículas: <span id="particleCount">350</span></label>
+          <input id="particles" type="range" min="80" max="700" value="350" step="10"/>
+        </div>
+        <div class="row">
+          <label>Mostrar rastro</label>
+          <input id="trails" type="checkbox" checked/>
+        </div>
+      </div>
+
+      <div class="panel small">
+        <h2>Informações</h2>
+        <p>Reação: <strong>A + B → C</strong> e <strong>C → A + B</strong>. Sistema fotoquímico: luz excita reagentes aumentando probabilidade de reação por colisão.</p>
+        <p class="small-note">Clique na área para dar um pulso de luz. Arraste a lanterna (ícone) para simular fonte direcional.</p>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="panel">
+        <h2>Curvas macroscópicas</h2>
+        <canvas id="chart" width="760" height="260"></canvas>
+        <div class="chart-controls">
+          <button id="exportCsv">Exportar CSV</button>
+          <button id="compareBtn">Comparar: sem luz ↔ com luz</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Dados em tempo real</h2>
+        <div class="stats">
+          <div>A: <span id="countA">0</span></div>
+          <div>B: <span id="countB">0</span></div>
+          <div>C: <span id="countC">0</span></div>
+          <div>Colisões: <span id="collisions">0</span></div>
+          <div>kf (estimado): <span id="kf">0.000</span> s⁻¹</div>
+          <div>kr (estimado): <span id="kr">0.000</span> s⁻¹</div>
+          <div>K (estimado): <span id="Kest">—</span></div>
+        </div>
+      </div>
+
+      <div class="panel small">
+        <h2>Modelo</h2>
+        <p>kf = k0 · (1 + α · I^β) onde I é intensidade normalizada. Partículas absorvem fótons; “excited” tem prob. de reagir maior durante tempo τ.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Respiração automatica desligada</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
